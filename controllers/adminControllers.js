@@ -1,4 +1,5 @@
 import { User } from "../models/userModels.js"
+import ErrorHandler from "../utils/ErrorHandler.js";
 
 export const allUsers=async(req,res,next)=>{
 
@@ -54,6 +55,35 @@ export const deleteUser=async(req,res,next)=>{
             success:true,
             message:"User Removed"
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+export const createuserJobsHistory=async(req,res,next)=>{
+    try {
+        const { title, description, salary, location } = req.body;
+        const currentUser=await User.findOne({_id:req.user._id})
+        if(!currentUser)
+        {
+            return next(new ErrorHandler("You have to LogIn",400))
+        }
+        else
+        {
+            const addJobHistory={
+                title, description, salary, location,user:req.user._id
+            }
+            currentUser.jobHistory.push(addJobHistory)
+            await currentUser.save()
+        }
+
+        res.status(200).json({
+            success: true,
+            currentUser
+        })
+
+        
     } catch (error) {
         next(error)
     }

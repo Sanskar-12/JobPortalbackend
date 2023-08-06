@@ -65,3 +65,4 @@ export const profile=(req,res,next)=>{
     user:req.user
   })
 }
+
