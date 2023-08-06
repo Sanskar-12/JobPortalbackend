@@ -91,6 +91,7 @@ export const showJobs=async(req,res,next)=>{
             page,
             pages: Math.ceil(count / pageSize),
             count,
+            setUniqueLocation
         })
     } catch (error) {
         next(error)
