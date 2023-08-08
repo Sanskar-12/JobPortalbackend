@@ -11,6 +11,7 @@ export const sendToken=(user,res,message,statusCode)=>{
       secure:process.env.NODE_ENV==="Development" ? false:true,
     }).json({
         success:true,
+        role:user.role,
         message:message,
     })
 }
