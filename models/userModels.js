@@ -19,9 +19,7 @@ const jobsHistorySchema = new mongoose.Schema(
     location: {
       type: String,
     },
-    interviewDate: {
-      type: Date,
-    },
+    
     applicationStatus: {
       type: String,
       enum: ["pending", "accepted", "rejected"],
